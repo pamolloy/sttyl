@@ -1,0 +1,70 @@
+NAME
+	sttyl - stty lite
+
+SYNOPSIS
+	sttyl [setting <character>]
+
+DESCRIPTION
+	Print or change terminal characteristics. stty-lite will only
+	function properly with the Bourne Shell. The Bash shell does not
+	read certain settings.
+
+	The FSF version of stty accepts control characters as two character
+	strings. However, this version only accepts single characters, which
+	requires the user to type Ctrl-V and then the special character.
+
+	Multiple command line arguments are accepted. Unlike stty, sttyl
+	does not accept non-option arguments. In that case the error message
+	"invalid argument" is printed to stderr.
+
+	Special characters:
+		erase CHAR
+			CHAR will erase the last character typed
+
+		intr CHAR
+			CHAR will send an interrupt signal
+
+		kill CHAR
+			CHAR will erase the current line
+
+	Special settings:
+		N
+			set the intput and output speeds to N bauds
+
+	Input settings:
+		[-]icrnl
+			translate carriage return to newline
+
+	Output settings:
+		[-]onlcr
+			translate newline to arraige return-newline
+
+		[-]olcuc
+			translate lowercase characters to uppercase
+
+	Local settings:
+		[-]echo
+			echo input characters
+
+		[-]echoe
+			same as [-]crterase: echo erase characters as backspace-
+			space-backspace
+
+		[-]icanon
+			enable erase, kill, werase, and rprnt special characters
+
+		[-]isig
+			enable interrrupt, quit, and suspend special characters
+
+EXAMPLES
+	List ALL available tty settings
+		stty-lite
+
+	Enable a setting by adding it as an argument and disable it by
+	prepending the argument with a dash.
+		stty -echo olcuc
+
+	Assign a character to a setting by adding the character after the
+	setting name.
+		stty erase ^X
+
