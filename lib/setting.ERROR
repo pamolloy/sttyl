@@ -1,0 +1,47 @@
+setting.c:26:39: warning: ‘struct option’ declared inside parameter list [enabled by default]
+setting.c:26:39: warning: its scope is only this definition or declaration, which is probably not what you want [enabled by default]
+setting.c:27:40: warning: ‘struct option’ declared inside parameter list [enabled by default]
+setting.c:28:42: warning: ‘struct option’ declared inside parameter list [enabled by default]
+setting.c:29:39: warning: ‘struct option’ declared inside parameter list [enabled by default]
+setting.c:30:40: warning: ‘struct option’ declared inside parameter list [enabled by default]
+setting.c:31:42: warning: ‘struct option’ declared inside parameter list [enabled by default]
+setting.c:41:2: warning: initialization from incompatible pointer type [enabled by default]
+setting.c:41:2: warning: (near initialization for ‘devopts[0].printer’) [enabled by default]
+setting.c:41:2: warning: initialization from incompatible pointer type [enabled by default]
+setting.c:41:2: warning: (near initialization for ‘devopts[0].setter’) [enabled by default]
+setting.c:42:2: warning: initialization from incompatible pointer type [enabled by default]
+setting.c:42:2: warning: (near initialization for ‘devopts[1].printer’) [enabled by default]
+setting.c:42:2: warning: initialization from incompatible pointer type [enabled by default]
+setting.c:42:2: warning: (near initialization for ‘devopts[1].setter’) [enabled by default]
+setting.c:43:2: warning: initialization from incompatible pointer type [enabled by default]
+setting.c:43:2: warning: (near initialization for ‘devopts[2].printer’) [enabled by default]
+setting.c:43:2: warning: initialization from incompatible pointer type [enabled by default]
+setting.c:43:2: warning: (near initialization for ‘devopts[2].setter’) [enabled by default]
+setting.c:44:2: warning: initialization from incompatible pointer type [enabled by default]
+setting.c:44:2: warning: (near initialization for ‘devopts[3].printer’) [enabled by default]
+setting.c:44:2: warning: initialization from incompatible pointer type [enabled by default]
+setting.c:44:2: warning: (near initialization for ‘devopts[3].setter’) [enabled by default]
+setting.c:45:2: warning: initialization from incompatible pointer type [enabled by default]
+setting.c:45:2: warning: (near initialization for ‘devopts[4].printer’) [enabled by default]
+setting.c:45:2: warning: initialization from incompatible pointer type [enabled by default]
+setting.c:45:2: warning: (near initialization for ‘devopts[4].setter’) [enabled by default]
+setting.c:46:2: warning: initialization from incompatible pointer type [enabled by default]
+setting.c:46:2: warning: (near initialization for ‘devopts[5].printer’) [enabled by default]
+setting.c:46:2: warning: initialization from incompatible pointer type [enabled by default]
+setting.c:46:2: warning: (near initialization for ‘devopts[5].setter’) [enabled by default]
+setting.c:47:2: warning: initialization from incompatible pointer type [enabled by default]
+setting.c:47:2: warning: (near initialization for ‘devopts[6].printer’) [enabled by default]
+setting.c:47:2: warning: initialization from incompatible pointer type [enabled by default]
+setting.c:47:2: warning: (near initialization for ‘devopts[6].setter’) [enabled by default]
+setting.c:67:6: error: conflicting types for ‘s_in’
+setting.c:26:6: note: previous declaration of ‘s_in’ was here
+setting.c:72:6: error: conflicting types for ‘s_out’
+setting.c:27:6: note: previous declaration of ‘s_out’ was here
+setting.c:77:6: error: conflicting types for ‘s_local’
+setting.c:28:6: note: previous declaration of ‘s_local’ was here
+setting.c:92:6: error: conflicting types for ‘p_in’
+setting.c:29:6: note: previous declaration of ‘p_in’ was here
+setting.c:97:6: error: conflicting types for ‘p_out’
+setting.c:30:6: note: previous declaration of ‘p_out’ was here
+setting.c:102:6: error: conflicting types for ‘p_local’
+setting.c:31:6: note: previous declaration of ‘p_local’ was here

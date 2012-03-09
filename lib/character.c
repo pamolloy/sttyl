@@ -24,48 +24,54 @@
  *		setspl( struct special, struct termios, character )
  */
 
-#include <sttyl.h>		// FD
+#include "../sttyl.h"	// FD
 #include <termios.h>	// struct termios
 #include <ctype.h>		// isprint()
 #include <stddef.h>		// NULL
 #include <stdio.h>		// printf(), putchar()
 
+void printspl( struct spl *row, struct termios *ttyopts );
+int setspl( struct spl *row, struct termios *ttyopts, char *opt);
+
 struct spl {
 	tcflag_t constant;
 	char *name;
-	void(*print)(struct spl *, struct termios *);
-	void(*set)(struct spl *, struct termios *);
+	void (*print)(struct spl *, struct termios *);
+	void (*set)(struct spl *, struct termios *, char *);
 };
 
 struct spl splchars[] = {
-	{ VINTR, "intr", printspl, setspl },
-	{ VERASE, "erase", printspl, setspl },
-	{ VKILL, "kill", printspl, setspl },
-	{ 0, NULL, 0, 0 },
+	{ VINTR	, "intr"	, printspl	, setspl },
+	{ VERASE, "erase"	, printspl	, setspl },
+	{ VKILL	, "kill"	, printspl	, setspl },
+	{ 0		, NULL		, 0			, 0 },
 };
+
+void printc( int c )
+{
+	if ( isprint(c) != 0 ) {
+		putchar(c);
+	}
+	else {
+		printf("^%c", c - 1 + 'A');
+	}
+}
 
 void printspl( struct spl *row, struct termios *ttyopts )
 {
-	printf(row.name);
+	printf(row->name);
 	printf(" = ");
-	printc(ttyopts->c_cc[row.constant]);
-}
-
-void printc( char *character )
-{
-	if ( isprint(character) != 0 )
-		putchar(character);
-	else
-		printf("^%c", character - 1 + 'A')
+	printc(ttyopts->c_cc[row->constant]);
 }
 
 int setspl( struct spl *row, struct termios *ttyopts, char *opt)
 {
-	termios->c_cc[row.constant] = opt;
+	ttyopts->c_cc[row->constant] = *opt;
 
 	if (tcsetattr(FD, TCSANOW, ttyopts) == -1) {
 		perror("tcsetattr");
 		return -1;
 	}
+	return 0;
 }
 
