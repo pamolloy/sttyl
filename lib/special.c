@@ -87,7 +87,7 @@ void print_character( int c )
 		printf("^%c", c - 1 + 'A');
 	}
 	else {
-		printf("DEL");
+		printf("^?");
 	}
 }
 
