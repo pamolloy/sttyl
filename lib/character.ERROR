@@ -1,19 +1,9 @@
-character.c:33:40: warning: ‘struct spl’ declared inside parameter list [enabled by default]
-character.c:33:40: warning: its scope is only this definition or declaration, which is probably not what you want [enabled by default]
-character.c:34:37: warning: ‘struct spl’ declared inside parameter list [enabled by default]
 character.c:44:2: warning: initialization from incompatible pointer type [enabled by default]
-character.c:44:2: warning: (near initialization for ‘splchars[0].print’) [enabled by default]
-character.c:44:2: warning: initialization from incompatible pointer type [enabled by default]
-character.c:44:2: warning: (near initialization for ‘splchars[0].set’) [enabled by default]
+character.c:44:2: warning: (near initialization for ‘splchars[0].setter’) [enabled by default]
 character.c:45:2: warning: initialization from incompatible pointer type [enabled by default]
-character.c:45:2: warning: (near initialization for ‘splchars[1].print’) [enabled by default]
-character.c:45:2: warning: initialization from incompatible pointer type [enabled by default]
-character.c:45:2: warning: (near initialization for ‘splchars[1].set’) [enabled by default]
+character.c:45:2: warning: (near initialization for ‘splchars[1].setter’) [enabled by default]
 character.c:46:2: warning: initialization from incompatible pointer type [enabled by default]
-character.c:46:2: warning: (near initialization for ‘splchars[2].print’) [enabled by default]
-character.c:46:2: warning: initialization from incompatible pointer type [enabled by default]
-character.c:46:2: warning: (near initialization for ‘splchars[2].set’) [enabled by default]
-character.c:60:6: error: conflicting types for ‘printspl’
-character.c:33:6: note: previous declaration of ‘printspl’ was here
-character.c:67:5: error: conflicting types for ‘setspl’
-character.c:34:5: note: previous declaration of ‘setspl’ was here
+character.c:46:2: warning: (near initialization for ‘splchars[2].setter’) [enabled by default]
+/usr/lib/gcc/i686-pc-linux-gnu/4.6.2/../../../crt1.o: In function `_start':
+(.text+0x18): undefined reference to `main'
+collect2: ld returned 1 exit status
