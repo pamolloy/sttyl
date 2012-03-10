@@ -1,8 +1,12 @@
+/*
+ * TODO
+ */
+
+#include "sttyl.h"	// FD
 #include <termios.h>
 #include <stdio.h>	// perror()
 #include <stdlib.h>	// exit()
 #include <string.h>	// strcmp()
-#include <sttyl.h>	// FD
 
 int main( int ac, char **av )
 {
@@ -15,9 +19,9 @@ int main( int ac, char **av )
 	}
 
 	if ( ac <= 1 ) {
-		loop_opts(&ttyopts, NULL, 0);
+		loop_opts(&ttyopts, NULL, 0);	// Print all settings
 	}
-	else {
+	else {		// Parse for setting, character, or speed
 		int i;
 		for (i = 1; i < ac; i++) {
 			if (av[i][0] == '-')

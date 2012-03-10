@@ -10,7 +10,8 @@ System Interface:
 	access to a general terminal interface, which returns and changes
 	settings using the termios structure. The structure contains four
 	bit-mask fields that correspond to groups of terminal settings that
-	are defined as integers.
+	are defined as integers. The final element is an array of characters
+	that are accessed using constants defined in termios.h.
 
 	To print a control character use iscntrl to check the character and
 	then use arithmetic (i.e. ascii.h) to calculate which character to
@@ -43,6 +44,4 @@ Program Flow:
 		- If the argument is an integer, then set the baud rate using
 		  cfsetospeed() with one of the constants.
 
-//TODO Why are the arrays of flaginfo structures also declared as
-	structures?
 //TODO Use offsetof()
