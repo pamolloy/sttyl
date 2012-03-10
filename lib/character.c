@@ -34,7 +34,7 @@ struct spl {
 	tcflag_t constant;
 	char *name;
 	void (*printer)(struct spl *, struct termios *);
-	void (*setter)(struct spl *, struct termios *, char *);
+	int (*setter)(struct spl *, struct termios *, char *);
 };
 
 void printspl( struct spl *row, struct termios *ttyopts );
@@ -44,7 +44,7 @@ struct spl splchars[] = {
 	{ VINTR	, "intr"	, printspl	, setspl	},
 	{ VERASE, "erase"	, printspl	, setspl	},
 	{ VKILL	, "kill"	, printspl	, setspl	},
-	{ 0		, NULL		, 0			, 0			},
+	{ 0		, NULL		, 0			, 0			}
 };
 
 int setspl( struct spl *row, struct termios *ttyopts, char *opt)
@@ -63,6 +63,7 @@ int setspl( struct spl *row, struct termios *ttyopts, char *opt)
  */
 void printc( int c )
 {
+	//TODO Replace with iscntrl?
 	if ( isprint(c) != 0 ) {
 		putchar(c);
 	}
