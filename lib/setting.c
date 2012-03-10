@@ -55,6 +55,20 @@ struct opt devopts[] = {
 	{ 0			, NULL		, 0			, 0			}
 };
 
+void loop_setting( struct termios *ttyopts, char *opt, int on )
+{
+	int i;
+
+	for ( i = 0; devopts[i].name; i++ ) {
+		if ( opt == NULL ) {					// Print all options
+			devopts[i].printer(&devopts[i], ttyopts);
+		}
+		else if ( opt == devopts[i].name) {		// Set one option
+			devopts[i].setter(&devopts[i], ttyopts, on);
+		}
+	}
+}
+
 /*
  * TODO
  */

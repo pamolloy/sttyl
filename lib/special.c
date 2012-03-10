@@ -1,5 +1,5 @@
 /*
- * lib/character.c - functions to print and set special characters
+ * lib/special.c - functions to print and set special characters
  *
  * DATA STRUCTURES
  *	A structure containing the constant that defines the element in the
@@ -30,30 +30,46 @@
 #include <stddef.h>		// NULL
 #include <stdio.h>		// printf(), putchar()
 
-struct spl {
+struct special {
 	tcflag_t constant;
 	char *name;
-	void (*printer)(struct spl *, struct termios *);
-	int (*setter)(struct spl *, struct termios *, char *);
+	void (*printer)(struct special *, struct termios *);
+	int (*setter)(struct special *, struct termios *, char *);
 };
 
-void printspl( struct spl *row, struct termios *ttyopts );
-int setspl( struct spl *row, struct termios *ttyopts, char *opt);
+void printspl( struct special *row, struct termios *ttyopts );
+int setspl( struct special *row, struct termios *ttyopts, char *opt);
 
-struct spl splchars[] = {
-	{ VINTR	, "intr"	, printspl	, setspl	},
-	{ VERASE, "erase"	, printspl	, setspl	},
-	{ VKILL	, "kill"	, printspl	, setspl	},
-	{ 0		, NULL		, 0			, 0			}
+struct special special_table[] = {
+	{ VINTR	, "intr"	},
+	{ VERASE, "erase"	},
+	{ VKILL	, "kill"	},
+	{ 0		, NULL		}
 };
 
-int setspl( struct spl *row, struct termios *ttyopts, char *opt)
+int is_special( char *av )
 {
-	ttyopts->c_cc[row->constant] = *opt;
+	int i;
+
+	for (i = 0; special_table[i].name; i++) {
+		if ( special_table[i].name ) {
+			return i;
+		}
+	}
+	return -1;
+}
+
+int set_special( struct termios *ttyopts, int i, char *c)
+{
+	if ( isalpha(c) == 0 ) {
+		return -1;
+	}
+
+	ttyopts->c_cc[row->constant] = *c;
 
 	if (tcsetattr(FD, TCSANOW, ttyopts) == -1) {
 		perror("tcsetattr");
-		return -1;
+		exit(1);
 	}
 	return 0;
 }
@@ -61,21 +77,29 @@ int setspl( struct spl *row, struct termios *ttyopts, char *opt)
 /*
  * TODO
  */
-void printc( int c )
+void print_character( int c )
 {
 	//TODO Replace with iscntrl?
 	if ( isprint(c) != 0 ) {
 		putchar(c);
 	}
-	else {
+	else if ( iscntrl(c) != 0 ) {
 		printf("^%c", c - 1 + 'A');
+	}
+	else {
+		printf("DEL");
 	}
 }
 
-void printspl( struct spl *row, struct termios *ttyopts )
+void print_special( struct termios *ttyopts )
 {
-	printf(row->name);
-	printf(" = ");
-	printc(ttyopts->c_cc[row->constant]);
+	int i;
+	
+	for (i = 0; special_table[i].name; i++) {
+		printf(special_table[i].name);
+		printf(" = ");
+		print_character(ttyopts->c_cc[special_table[i].constant]);
+		printf("; ");
+	}
 }
 

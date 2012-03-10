@@ -50,7 +50,7 @@ struct spd baud_spds[] = {
 	{ 0			, NULL		}
 };
 
-int setspd ( struct termios *ttyopts, char *spd )
+int set_speed ( struct termios *ttyopts, char *spd )
 {
 	int i;
 
@@ -58,21 +58,23 @@ int setspd ( struct termios *ttyopts, char *spd )
 		if ( strcmp(baud_spds[i].name, spd) == 0 ) {
 			if ( cfsetospeed(ttyopts, baud_spds[i].constant) == -1 ) {
 				perror("cfsetospeed");
-				return -1;
+				exit(1);
 			}
+			return 0;
 		}
 	}
-	return 0;
+	return -1;
 }
 
-void printspd( struct termios *ttyopts )
+void print_speed( struct termios *ttyopts )
 {
 	int cfospeed = cfgetospeed(ttyopts);
 	
 	int i;
 	for ( i = 0; baud_spds[i].name; i++ ) {
-		if ( cfospeed & baud_spds[i].constant )
+		if ( cfospeed & baud_spds[i].constant ) {
 			printf(baud_spds[i].name);
+		}
 	}
 }
 
