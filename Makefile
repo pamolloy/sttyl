@@ -3,7 +3,7 @@ CFLAGS=-Wall -g
 OBJECTS=main.o special.o setting.o speed.o
 
 sttyl: $(OBJECTS)
-	$(CC) $(CFLAGS) $(OBJECTS)
+	$(CC) $(CFLAGS) -o sttyl $(OBJECTS)
 
 $(OBJETS) : defs.h
 
