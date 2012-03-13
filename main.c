@@ -1,5 +1,5 @@
 /*
- * sttyl - TODO
+ * sttyl - lite version of GNU stty
  */
 
 #include <termios.h>
@@ -7,6 +7,7 @@
 #include <stdlib.h>	// exit()
 #include <string.h>	// strcmp()
 #include <ctype.h>	// isdigit()
+#include <stddef.h>	// NULL
 
 #include "defs.h"
 
@@ -51,12 +52,17 @@ int check_speed( struct termios *ttyopts, char *av )
 /*
  * Check if the input argument variable is a valid special character.
  * If so, set the appropriate device special character element and
- * return 0. If the input character pointer is invalid then return -1
+ * return 0. If the input character pointer is invalid then return -1.
  */
 int check_special( struct termios *ttyopts, char *av, char *next)
 {
 	int i = is_special(av);
-	if ( i != -1 ) {
+	if ( i != -1) {
+		if ( next == NULL ) {
+			fprintf(stderr, "%s: missing argument to `erase'\n",
+					program_name);
+			exit(1);
+		}
 		if ( set_special(ttyopts, i, next) == -1 ) {
 			fprintf(stderr, "%s: Invalid integer argument `%s'\n",
 					program_name, next);
