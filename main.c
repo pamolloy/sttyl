@@ -8,9 +8,7 @@
 #include <string.h>	// strcmp()
 #include <ctype.h>	// isdigit()
 
-//#include "special.c"
-//#include "setting.c"
-//#include "speed.c"
+#include "defs.h"
 
 void process_args( struct termios *ttyopts, int ac, char *av[] );
 
