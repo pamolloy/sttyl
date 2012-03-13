@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-Wall -g -include "defs.h"
+CFLAGS=-Wall -g
 OBJECTS=main.o special.o setting.o speed.o
 
 sttyl: $(OBJECTS)
