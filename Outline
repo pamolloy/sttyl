@@ -21,15 +21,6 @@ Data Structures:
 	sttyl uses a table driven approach by moving an appropriate amount
 	of the computational logic into control tables. 
 
-	typedef enum { LOCAL, OUTPUT, INPUT, CONTROL } flagtype;
-
-	struct table
-	{
-		char *name;
-		tcflag_t mask;
-		tcflagtype mode;
-	};
-
 Program Flow:
 	- Get the parameters associated with the arguments and store them
 	  in a termios structure using tcgetattr().
@@ -37,11 +28,6 @@ Program Flow:
 	  termios structure and the baud rate using cfgetospeed()
 	- If one or more arguments are specified on the command line then
 	  change the settings with tcsetattr().
-		- Use the TCSADRAIN argument with output settings.
-		- Use the TCSAFLUSH argument ...
-		- Use the TCASNOW argument ...
-			//TODO When to use other arguments
-		- If the argument is an integer, then set the baud rate using
-		  cfsetospeed() with one of the constants.
+	- If the argument is an integer, then set the baud rate using
+	  cfsetospeed() with one of the constants.
 
-//TODO Use offsetof()
