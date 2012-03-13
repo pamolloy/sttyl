@@ -1,8 +1,12 @@
-CC = gcc
-CFLAGS=-Wall -g
+CC=gcc
+CFLAGS=-Wall -g -include "defs.h"
+OBJECTS=main.o special.o setting.o speed.o
 
-sttyl: sttyl.c
-	$(CC) sttyl.c
+sttyl: $(OBJECTS)
+	$(CC) $(CFLAGS) $(OBJECTS)
 
+$(OBJETS) : defs.h
+
+.PHONY : clean
 clean:
-	rm -f sttyl
+	rm sttyl $(OBJECTS)
