@@ -19,6 +19,8 @@
 #include <string.h>		// strcmp()
 #include <stdlib.h>		// exit()
 
+#include "defs.h"
+
 #define DEL 127	// ASCII decimal value for the delete character
 
 struct special { tcflag_t constant; char *name; };

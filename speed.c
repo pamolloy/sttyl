@@ -19,6 +19,8 @@
 #include <ctype.h>		// isdigit()
 #include <stdlib.h>		// exit()
 
+#include "defs.h"
+
 struct speed { speed_t constant; char *name; };
 
 struct speed baud[] = {

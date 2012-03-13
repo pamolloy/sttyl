@@ -33,6 +33,8 @@
 #include <stdio.h>		// printf()
 #include <stdlib.h>		// exit()
 
+#include "defs.h"
+
 struct option {
 	tcflag_t constant;
 	char *name;
