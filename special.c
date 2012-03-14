@@ -78,7 +78,6 @@ int set_special( struct termios *ttyopts, int i, char *c)
  */
 void print_character( int c )
 {
-	//TODO Replace with iscntrl?
 	if ( isprint(c) != 0 ) {
 		putchar(c);
 	}

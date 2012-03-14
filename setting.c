@@ -62,7 +62,9 @@ struct option setting_table[] = {
 
 
 /*
- * TODO
+ * Compare the character array pointer parameter to the names listed
+ * in setting_table. If a match is found then return the index of the
+ * corresponding terminal device setting. Otherwise return -1.
  */
 int is_setting( char *av )
 {
@@ -76,9 +78,22 @@ int is_setting( char *av )
 }
 
 /*
- * TODO
+ * Call the function corresponding to a table row identified by the
+ * index parameter, int i.
  */
-void s_opt( struct option *row, struct termios *ttyopts, tcflag_t *flag_p, int on )
+void set_setting( struct termios *ttyopts, int i, int on )
+{
+	setting_table[i].setter(&setting_table[i], ttyopts, on);
+}
+
+/*
+ * Mask a terminal device setting either on (1) or off (0) within the
+ * temporary termios structure, and then set the structure.
+ */
+void s_opt( struct option *row, 
+			struct termios *ttyopts, 
+			tcflag_t *flag_p, 
+			int on )
 {
 	if ( on == 1 )
 		*flag_p |= row->constant;
@@ -107,15 +122,8 @@ void s_local( struct option *row, struct termios *ttyopts, int on )
 }
 
 /*
- * TODO
- */
-void set_setting( struct termios *ttyopts, int i, int on )
-{
-	setting_table[i].setter(&setting_table[i], ttyopts, on);
-}
-
-/*
- * TODO
+ * Print each of the terminal device settings stored in the termios
+ * structure, with the corresponding function in setting_table.
  */
 void print_setting( struct termios *ttyopts )
 {
@@ -128,7 +136,8 @@ void print_setting( struct termios *ttyopts )
 }
 
 /*
- * TODO
+ * Mask the constant found in a option structure with the flag parameter
+ * and if true print its name, otherwise prepend a '-'.
  */
 void p_opt ( struct option *row, int flag)
 {

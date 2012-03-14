@@ -72,3 +72,6 @@ BUGS
 	If the user attempts to set a special character with more than one
 	character sttyl will assign the first character of that series,
 	rather than returning an `invalid integer argument' error.
+
+	The program parses each command-line argument individually unlike
+	stty, which verifies every argument before processing the first.
