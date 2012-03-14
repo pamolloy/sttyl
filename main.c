@@ -11,7 +11,11 @@
 
 #include "defs.h"
 
-void process_args( struct termios *ttyopts, int ac, char *av[] );
+int check_speed( struct termios *ttyopts, char *av );
+int check_special( struct termios *ttyopts, char *av, char *next);
+int check_setting( struct termios *ttyopts, char *av );
+void set_argvs( struct termios *ttyopts, int ac, char *av[] );
+void print_all( struct termios *ttyopts );
 
 static char *program_name;
 
@@ -27,9 +31,49 @@ int main( int ac, char **av )
 		exit(1);
 	}
 
-	process_args(&ttyopts, ac, av);
+	if ( ac <= 1 ) {
+		print_all(&ttyopts);
+	}
+	else {
+		set_argvs(&ttyopts, ac, av);
+	}
 
 	exit(0);
+}
+
+/*
+ * Print all of the available terminal device settings.
+ */
+void print_all( struct termios *ttyopts )
+{
+	print_speed(ttyopts);		// Print the speed
+	print_special(ttyopts);		// Print all special chars
+	print_setting(ttyopts);		// Print all settings
+}
+
+/*
+ * Match each argument variable parameter against available settings.
+ * If no match is found print an error message.
+ */
+void set_argvs( struct termios *ttyopts, int ac, char *av[] )
+{
+	int i;
+	for (i = 1; i < ac; i++) {
+		if ( check_speed(ttyopts, av[i]) == 0 ) {
+			continue;
+		}
+		else if ( check_special(ttyopts, av[i], av[i+1]) == 0 ) {
+			i++;
+			continue;
+		}
+		else if ( check_setting(ttyopts, av[i]) == 0 ) {
+			continue;
+		}
+		else {
+			fprintf(stderr, "%s: invalid argument `%s'\n",
+				program_name, av[i]);
+		}
+	}
 }
 
 /*
@@ -74,7 +118,9 @@ int check_special( struct termios *ttyopts, char *av, char *next)
 }
 
 /*
- * TODO
+ * Check if the input argument variable is a valid device setting. If
+ * so, turn the setting on or off depending on whether it is prefixed
+ * with a dash. Return -1 if the input does not match, or 0 on success.
  */
 int check_setting( struct termios *ttyopts, char *av )
 {
@@ -89,37 +135,5 @@ int check_setting( struct termios *ttyopts, char *av )
 		return 0;
 	}
 	return -1;
-}
-
-/*
- * TODO
- */
-void process_args( struct termios *ttyopts, int ac, char *av[] )
-//TODO Split up this function
-{
-	if ( ac <= 1 ) {
-		print_speed(ttyopts);			// Print the speed
-		print_special(ttyopts);			// Print all special chars
-		print_setting(ttyopts);	// Print all settings
-	}
-	else {
-		int i;
-		for (i = 1; i < ac; i++) {
-			if ( check_speed(ttyopts, av[i]) == 0 ) {
-				continue;
-			}
-			else if ( check_special(ttyopts, av[i], av[i+1]) == 0 ) {
-				i++;
-				continue;
-			}
-			else if ( check_setting(ttyopts, av[i]) == 0 ) {
-				continue;
-			}
-			else {
-				fprintf(stderr, "%s: invalid argument `%s'\n",
-					program_name, av[i]);
-			}
-		}
-	}
 }
 
